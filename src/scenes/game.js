@@ -5,7 +5,7 @@ import { makeRing } from "../entities/ring";
 
 export default function game() {
   const citySfx = k.play("city", { volume: 0.2, loop: true });
-  k.setGravity(3100);
+  k.setGravity(5000);
 
   const bgPieceWidth = 1920;
   const bgPieces = [
@@ -26,6 +26,20 @@ export default function game() {
   const sonic = makeSonic(k.vec2(200, 745));
   sonic.setControls();
   sonic.setEvents();
+
+  const controlsText = k.add([
+    k.text("Press Space/Click/Touch to Jump!", {
+      font: "mania",
+      size: 64,
+    }),
+    k.anchor("center"),
+    k.pos(k.center()),
+  ]);
+
+  const dismissControlsAction = k.onButtonPress("jump", () => {
+    k.destroy(controlsText);
+    dismissControlsAction.cancel();
+  });
 
   let score = 0;
   let scoreMultiplier = 0;
@@ -86,7 +100,7 @@ export default function game() {
     motobug.onExitScreen(() => {
       if (motobug.pos.x < 0) k.destroy(motobug);
     });
-    const waitTime = k.rand(0.5, 2.5);
+    const waitTime = k.rand(0.8, 2.5);
 
     k.wait(waitTime, spawnMotoBug);
   };
