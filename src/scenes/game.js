@@ -1,5 +1,6 @@
 import { k } from "../kaplayCtx";
 import { makeSonic } from "../entities/sonic";
+import { makeMotobug } from "../entities/motobug";
 
 export default function game() {
   k.setGravity(3100);
@@ -24,10 +25,55 @@ export default function game() {
   sonic.setControls();
   sonic.setEvents();
 
+  sonic.onCollide("enemy", (enemy) => {
+    if (!sonic.isGrounded()) {
+      k.play("destroy", { volume: 0.5 });
+      k.play("hyper-ring", { volume: 0.5 });
+      k.destroy(enemy);
+      sonic.play("jump");
+      sonic.jump();
+      //   scoreMultiplier += 1;
+      //   score += 10 * scoreMultiplier;
+      //   scoreText.text = `SCORE : ${score}`;
+      //   if (scoreMultiplier === 1)
+      //     sonic.ringCollectUI.text = `+${10 * scoreMultiplier}`;
+      //   if (scoreMultiplier > 1) sonic.ringCollectUI.text = `x${scoreMultiplier}`;
+      //   k.wait(1, () => {
+      //     sonic.ringCollectUI.text = "";
+      //   });
+      return;
+    }
+
+    k.play("hurt", { volume: 0.5 });
+    // k.setData("current-score", score);
+    k.go("gameover", citySfx);
+  });
+
   let gameSpeed = 300;
   k.loop(1, () => {
     gameSpeed += 50;
   });
+
+  const spawnMotoBug = () => {
+    const motobug = makeMotobug(k.vec2(1950, 773));
+    motobug.onUpdate(() => {
+      if (gameSpeed < 3000) {
+        motobug.move(-(gameSpeed + 300), 0);
+        return;
+      }
+      motobug.move(-gameSpeed, 0);
+    });
+
+    motobug.onExitScreen(() => {
+      if (motobug.pos.x < 0) k.destroy(motobug);
+    });
+    const waitTime = k.rand(0.5, 2.5);
+
+    k.wait(waitTime, spawnMotoBug);
+  };
+  spawnMotoBug();
+
+  
 
   k.add([
     k.rect(1920, 300),
