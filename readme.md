@@ -6,10 +6,6 @@ A fast-paced endless runner game featuring Sonic the Hedgehog, built with JavaSc
 
 **[Play the Game](https://sonic-runner06.netlify.app/)**
 
-## 📸 Screenshots
-
-![Sonic Runner Gameplay](https://via.placeholder.com/800x400?text=Sonic+Runner+Gameplay)
-
 ## 🎮 Game Features
 
 - **Endless Running**: Infinite side-scrolling gameplay with increasing difficulty
@@ -223,21 +219,6 @@ This project is open source and available under the [MIT License](LICENSE).
 - **Kaplay** - Excellent game engine for web games
 - **Vite** - Fast build tool and development server
 - **Netlify** - Hosting and deployment platform
-
-## 📋 Todo / Future Enhancements
-
-- [ ] Add more enemy types (Buzz Bomber, Crabmeat)
-- [ ] Implement power-ups (Speed Boost, Invincibility)
-- [ ] Add multiple background themes
-- [ ] Create boss battles
-- [ ] Add particle effects and screen shake
-- [ ] Implement achievements system
-- [ ] Add multiplayer leaderboards
-- [ ] Mobile app version
-- [ ] Add more music tracks
-- [ ] Implement save states
-
----
 
 **Made with ❤️ and JavaScript**
 
